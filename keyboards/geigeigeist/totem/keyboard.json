@@ -20,9 +20,9 @@
     "tags": ["split", "column-staggered"],
     "firmware_format": "uf2",
     "usb": {
-        "device_version": "0.0.3",
+        "device_version": "0.3.0",
         "pid": "0x0002",
-        "vid": "0xFEED"
+        "vid": "0x3A3C"
     },
     "split": {
         "enabled": true,
