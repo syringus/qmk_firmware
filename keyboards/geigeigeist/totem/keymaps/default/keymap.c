@@ -43,6 +43,7 @@ enum totem_layers {
 #define LT_TAB LT(U_MOUSE, KC_TAB)
 #define LT_BSPC LT(U_NUM, KC_BSPC)
 #define LT_ENT LT(U_SYM, KC_ENT)
+#define LT_DEL LT(U_FUN, KC_DEL)
 #define LT_Z LT(U_BUTTON, KC_Z)
 #define LT_SLSH LT(U_BUTTON, KC_SLSH)
 
@@ -52,7 +53,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                          KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
                  MT_A,    MT_S,    MT_D,    MT_F,    KC_G,                          KC_H,    MT_J,    MT_K,    MT_L,    MT_SCLN,
         KC_NO,   LT_Z,    MT_X,    KC_C,    KC_V,    KC_B,                          KC_N,    KC_M,    KC_COMM, MT_DOT,  LT_SLSH, KC_NO,
-                                            LT_ESC,  LT_SPC,  LT_TAB,     LT_ENT,   LT_BSPC, KC_DEL
+                                            LT_ESC,  LT_SPC,  LT_TAB,     LT_ENT,   LT_BSPC, LT_DEL
     ),
     [U_NAV] = LAYOUT(
                  KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                         U_RDO,   U_PST,   U_CPY,   U_CUT,   U_UND,
@@ -89,5 +90,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                  KC_COLN, KC_DLR,  KC_PERC, KC_CIRC, KC_PLUS,                       KC_NO,   KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,
         KC_NO,   KC_TILD, KC_EXLM, KC_AT,   KC_HASH, KC_PIPE,                       KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
                                             KC_LPRN, KC_RPRN, KC_UNDS,    KC_NO,    KC_NO,   KC_NO
+    ),
+    [U_FUN] = LAYOUT(
+                 KC_F12,  KC_F7,   KC_F8,   KC_F9,   KC_PSCR,                       KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+                 KC_F11,  KC_F4,   KC_F5,   KC_F6,   KC_SCRL,                       KC_NO,   KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,
+        KC_NO,   KC_F10,  KC_F1,   KC_F2,   KC_F3,   KC_PAUS,                       KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+                                            KC_APP,  KC_SPC,  KC_TAB,    KC_NO,    KC_NO,   KC_NO
     )
 };
