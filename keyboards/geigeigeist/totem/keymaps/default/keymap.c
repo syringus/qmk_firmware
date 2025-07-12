@@ -47,6 +47,26 @@ enum totem_layers {
 #define LT_Z LT(U_BUTTON, KC_Z)
 #define LT_SLSH LT(U_BUTTON, KC_SLSH)
 
+// Tap Dance
+#define TD_NAV TD(TD_U_NAV)
+enum {
+    TD_U_NAV,
+    TD_U_MOUSE,
+    TD_U_BUTTON,
+    TD_U_MEDIA,
+    TD_U_NUM,
+    TD_U_SYM,
+    TD_U_FUN,
+};
+void td_u_nav(tap_dance_state_t *state, void *user_data) {
+    if (state->count == 2) {
+        default_layer_set((layer_state_t)1 << U_NAV);
+    }
+}
+tap_dance_action_t tap_dance_actions[] = {
+    [TD_U_NAV] = ACTION_TAP_DANCE_FN(td_u_nav),
+};
+
 // LAYERS
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [U_BASE] = LAYOUT(
@@ -58,7 +78,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [U_NAV] = LAYOUT(
                  KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                         U_RDO,   U_PST,   U_CPY,   U_CUT,   U_UND,
                  KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, KC_NO,                         KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT,CW_TOGG,
-        KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,                         KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_INS,  KC_NO,
+        KC_NO,   KC_NO,   KC_NO,   KC_NO,   TD_NAV,  KC_NO,                         KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_INS,  KC_NO,
                                             KC_NO,   KC_NO,   KC_NO,      KC_ENT,   KC_BSPC, KC_DEL
     ),
     [U_MOUSE] = LAYOUT(
