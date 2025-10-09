@@ -92,20 +92,26 @@ tap_dance_action_t tap_dance_actions[] = {
 // CUSTOM KEYCODES
 enum custom_keycodes {
     CK_TILE = SAFE_RANGE,
+    ALT_F4,
 };
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-        case CK_TILE:
-            if (record->event.pressed) {
-                layer_on(U_TILE);
-                register_code(KC_F24);
-            } else {
-                unregister_code(KC_F24);
-                layer_off(U_TILE);
-            }
-        default:
-            return true;
+    case CK_TILE:
+        if (record->event.pressed) {
+            layer_on(U_TILE);
+            register_code(KC_F24);
+        } else {
+            unregister_code(KC_F24);
+            layer_off(U_TILE);
+        }
+        break;
+    case ALT_F4:
+        if (record->event.pressed) {
+            SEND_STRING(SS_LALT(SS_TAP(X_F4)));
+        }
+        break;
     }
+    return true;
 }
 
 // LAYERS
@@ -119,7 +125,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [U_NAV] = LAYOUT(
                  KC_NO,   KC_NO,   KC_NO,   TD_BASE, KC_NO,                         U_RDO,   U_PST,   U_CPY,   U_CUT,   U_UND,
                  KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, KC_NO,                         KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT,CW_TOGG,
-        KC_NO,   KC_NO,   KC_NO,   TD_NUM,  TD_NAV,  KC_NO,                         KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_INS,  KC_NO,
+        KC_NO,   ALT_F4,  KC_NO,   TD_NUM,  TD_NAV,  KC_NO,                         KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_INS,  KC_NO,
                                             KC_NO,   KC_NO,   KC_NO,      KC_ENT,   KC_BSPC, KC_DEL
     ),
     [U_MOUSE] = LAYOUT(
