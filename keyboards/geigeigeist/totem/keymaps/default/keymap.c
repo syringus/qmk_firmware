@@ -141,7 +141,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             KC_NO,   KC_NO,   KC_NO,      KC_MSTP,  KC_MPLY, KC_MUTE
     ),
     [U_BUTTON] = LAYOUT(
-                 U_UND,   U_CUT,   U_CPY,   U_PST,   U_RDO,                         U_RDO,   U_PST,   U_CPY,   U_CUT,   U_UND,
+                 U_UND,   DM_REC1, DM_RSTP, DM_PLY1, U_RDO,                         U_RDO,   DM_PLY2, DM_RSTP, DM_REC2, U_UND,
                  KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, KC_NO,                         KC_NO,   KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,
         KC_NO,   U_UND,   U_CUT,   U_CPY,   U_PST,   U_RDO,                         U_RDO,   U_PST,   U_CPY,   U_CUT,   U_UND,   KC_NO,
                                             MS_BTN3, MS_BTN1, MS_BTN2,    MS_BTN2,  MS_BTN1, MS_BTN3
