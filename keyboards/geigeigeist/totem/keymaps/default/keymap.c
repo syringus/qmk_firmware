@@ -17,7 +17,9 @@
         LAYER_X(NUM) \
         LAYER_X(SYM) \
         LAYER_X(FUN) \
-        LAYER_X(TILE)
+        LAYER_X(TILE) \
+        LAYER_X(GAME) \
+        LAYER_X(GAME2)
 #endif
 enum layers {
 #define LAYER_X(LAYER) U_##LAYER,
@@ -50,6 +52,7 @@ enum layers {
 #define LT_DEL LT(U_FUN, KC_DEL)
 #define LT_Z LT(U_BUTTON, KC_Z)
 #define LT_SLSH LT(U_BUTTON, KC_SLSH)
+#define MO_GAME2 MO(U_GAME2)
 // Tap dance
 #define TD_BASE TD(TD_U_BASE)
 #define TD_NAV TD(TD_U_NAV)
@@ -59,6 +62,8 @@ enum layers {
 #define TD_NUM TD(TD_U_NUM)
 #define TD_SYM TD(TD_U_SYM)
 #define TD_FUN TD(TD_U_FUN)
+#define TD_GAME TD(TD_U_GAME)
+
 // COMBOS
 // Send GUI when LT_SPC+A or LT_BSPC+' is pressed.
 const uint16_t PROGMEM gui_combo_left[] = {LT_SPC, KC_A, COMBO_END};
@@ -74,6 +79,7 @@ enum {
     LAYERS
 #undef LAYER_X
 };
+// The TD_<layer> key needs to be pressed twice to switch layer.
 #define LAYER_X(LAYER) \
     void td_u_##LAYER(tap_dance_state_t *state, void *user_data) { \
         if (state->count == 2) { \
@@ -147,7 +153,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             MS_BTN3, MS_BTN1, MS_BTN2,    MS_BTN2,  MS_BTN1, MS_BTN3
     ),
     [U_NUM] = LAYOUT(
-                 KC_LBRC, KC_7,    KC_8,    KC_9,    KC_RBRC,                       KC_NO,   TD_BASE, KC_NO,   KC_NO,   KC_NO,
+                 KC_LBRC, KC_7,    KC_8,    KC_9,    KC_RBRC,                       TD_GAME, TD_BASE, KC_NO,   KC_NO,   KC_NO,
                  KC_SCLN, KC_4,    KC_5,    KC_6,    KC_EQL,                        KC_NO,   KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,
         KC_NO,   KC_GRV,  KC_1,    KC_2,    KC_3,    KC_BSLS,                       KC_NO,   TD_NUM,  TD_NAV,  KC_NO,   KC_NO,   KC_NO,
                                             KC_DOT,  KC_0,    KC_MINS,    KC_NO,    KC_NO,   KC_NO
@@ -169,5 +175,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                          KC_H,    KC_J,    KC_K,    KC_L,    KC_QUOT,
         CK_TILE, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,                          KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, CK_TILE,
                                             KC_LSFT, KC_LALT, KC_LCTL,    KC_LCTL,  KC_LALT, KC_LSFT
+    ),
+    [U_GAME] = LAYOUT(
+                 KC_TAB,  KC_Q,    KC_X,    KC_E,    KC_R,                          KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_TAB,
+                 KC_LSFT, KC_A,    KC_W,    KC_D,    KC_F,                          KC_NO,   KC_LEFT, KC_UP,   KC_RIGHT,KC_LSFT,
+        KC_ESC,  KC_LCTL, KC_Z,    KC_S,    KC_C,    KC_V,                          KC_NO,   KC_NO,   KC_DOWN, KC_NO,   KC_LCTL, TD_BASE,
+                                            KC_LALT, KC_SPC,  MO_GAME2,   MO_GAME2, KC_SPC,  KC_LALT
+    ),
+    [U_GAME2] = LAYOUT(
+                 KC_HOME, KC_5,    KC_6,    KC_7,    KC_8,                          KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
+                 KC_ENT,  KC_1,    KC_2,    KC_3,    KC_4,                          KC_H,    KC_J,    KC_K,    KC_L,    KC_QUOT,
+        KC_B,    KC_G,    KC_J,    KC_I,    KC_M,    KC_T,                          KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_NO,
+                                            KC_NO,   KC_NO,   MO_GAME2,   MO_GAME2, KC_BSPC, KC_DEL
     )
 };
