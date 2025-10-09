@@ -1,6 +1,6 @@
 # TOTEM
 
-![geigeigeist/totem](https://imgur.com/a/2efW2Tp)
+![geigeigeist/totem](https://i.imgur.com/50lHk6U.jpeg)
 
 TOTEM is a 38 key column-staggered choc split keyboard.
 
@@ -20,15 +20,19 @@ Flashing example for this keyboard:
 
     make geigeigeist/totem:default:flash
 
-or for the left halve:
+or for the left half:
 
     qmk flash -j 0 -kb geigeigeist/totem -km default -bl uf2-split-left
 
-and for the right halve:
+and for the right half:
 
     qmk flash -j 0 -kb geigeigeist/totem -km default -bl uf2-split-right
 
-See the [build environment setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more information. Brand new to QMK? Start with our [Complete Newbs Guide](https://docs.qmk.fm/#/newbs).
+See the [build environment
+setup](https://docs.qmk.fm/#/getting_started_build_tools) and the [make
+instructions](https://docs.qmk.fm/#/getting_started_make_guide) for more
+information. Brand new to QMK? Start with our [Complete Newbs
+Guide](https://docs.qmk.fm/#/newbs).
 
 ## Bootloader
 
