@@ -27,14 +27,12 @@ enum layers {
 
 // KEY DEFINITIONS
 // Home mod
-#define MT_A MT(MOD_LGUI, KC_A)
 #define MT_S MT(MOD_LALT, KC_S)
 #define MT_D MT(MOD_LCTL, KC_D)
 #define MT_F MT(MOD_LSFT, KC_F)
 #define MT_J MT(MOD_RSFT, KC_J)
 #define MT_K MT(MOD_LCTL, KC_K)
 #define MT_L MT(MOD_LALT, KC_L)
-#define MT_QUOT MT(MOD_LGUI, KC_QUOT)
 #define MT_X MT(MOD_RALT, KC_X)
 #define MT_DOT MT(MOD_RALT, KC_DOT)
 // Custom
@@ -61,6 +59,14 @@ enum layers {
 #define TD_NUM TD(TD_U_NUM)
 #define TD_SYM TD(TD_U_SYM)
 #define TD_FUN TD(TD_U_FUN)
+// COMBOS
+// Send GUI when LT_SPC+A or LT_BSPC+' is pressed.
+const uint16_t PROGMEM gui_combo_left[] = {LT_SPC, KC_A, COMBO_END};
+const uint16_t PROGMEM gui_combo_right[] = {LT_BSPC, KC_QUOT, COMBO_END};
+combo_t key_combos[] = {
+    COMBO(gui_combo_left, MOD_LGUI),
+    COMBO(gui_combo_right, MOD_LGUI),
+};
 
 // TAP DANCE
 enum {
@@ -106,7 +112,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [U_BASE] = LAYOUT(
                  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                          KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
-                 MT_A,    MT_S,    MT_D,    MT_F,    KC_G,                          KC_H,    MT_J,    MT_K,    MT_L,    MT_QUOT,
+                 KC_A,    MT_S,    MT_D,    MT_F,    KC_G,                          KC_H,    MT_J,    MT_K,    MT_L,    KC_QUOT,
         CK_TILE, LT_Z,    MT_X,    KC_C,    KC_V,    KC_B,                          KC_N,    KC_M,    KC_COMM, MT_DOT,  LT_SLSH, CK_TILE,
                                             LT_ESC,  LT_SPC,  LT_TAB,     LT_ENT,   LT_BSPC, LT_DEL
     ),
