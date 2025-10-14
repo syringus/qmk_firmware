@@ -69,8 +69,8 @@ enum layers {
 const uint16_t PROGMEM gui_combo_left[] = {LT_SPC, KC_A, COMBO_END};
 const uint16_t PROGMEM gui_combo_right[] = {LT_BSPC, KC_QUOT, COMBO_END};
 combo_t key_combos[] = {
-    COMBO(gui_combo_left, MOD_LGUI),
-    COMBO(gui_combo_right, MOD_LGUI),
+    COMBO(gui_combo_left, KC_LGUI),
+    COMBO(gui_combo_right, KC_LGUI),
 };
 
 // TAP DANCE
