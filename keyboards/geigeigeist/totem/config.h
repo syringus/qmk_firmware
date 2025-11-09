@@ -15,3 +15,6 @@
 #define FLOW_TAP_TERM 150
 // https://docs.qmk.fm/tap_hold#chordal-hold
 #define CHORDAL_HOLD
+// https://docs.qmk.fm/tap_hold#retro-tapping
+#define RETRO_TAPPING
+#define DUMMY_MOD_NEUTRALIZER_KEYCODE KC_F18
