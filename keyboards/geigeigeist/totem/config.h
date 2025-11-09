@@ -13,3 +13,5 @@
 
 // https://docs.qmk.fm/tap_hold#flow-tap
 #define FLOW_TAP_TERM 150
+// https://docs.qmk.fm/tap_hold#chordal-hold
+#define CHORDAL_HOLD
