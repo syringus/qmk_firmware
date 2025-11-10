@@ -18,3 +18,5 @@
 // https://docs.qmk.fm/tap_hold#retro-tapping
 #define RETRO_TAPPING
 #define DUMMY_MOD_NEUTRALIZER_KEYCODE KC_F18
+// TAP_CODE_DELAY for LT taps to work in games
+#define TAP_CODE_DELAY 20

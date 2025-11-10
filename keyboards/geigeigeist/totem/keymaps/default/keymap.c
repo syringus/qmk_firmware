@@ -169,7 +169,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [U_FUN] = LAYOUT(
                  KC_F12,  KC_F7,   KC_F8,   KC_F9,   KC_PSCR,                       KC_NO,   TD_BASE, KC_NO,   KC_NO,   KC_NO,
                  KC_F11,  KC_F4,   KC_F5,   KC_F6,   KC_SCRL,                       KC_NO,   KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,
-        KC_NO,   KC_F10,  KC_F1,   KC_F2,   KC_F3,   KC_PAUS,                       KC_NO,   TD_FUN,  TD_MEDIA,KC_NO,   KC_NO,   KC_SLEEP,
+        KC_NO,   KC_F10,  KC_F1,   KC_F2,   KC_F3,   KC_PAUS,                       KC_NO,   TD_FUN,  TD_MEDIA,KC_NO,   KC_NO,   KC_SLEP,
                                             KC_APP,  KC_SPC,  KC_TAB,     KC_NO,    KC_NO,   KC_NO
     ),
     [U_TILE] = LAYOUT(
@@ -179,15 +179,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             KC_LSFT, KC_LALT, KC_LCTL,    KC_LCTL,  KC_LALT, KC_LSFT
     ),
     [U_GAME] = LAYOUT(
-                 KC_TAB,  KC_Q,    KC_X,    KC_E,    KC_R,                          KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_TAB,
+                 KC_TAB,  KC_Q,    KC_V,    KC_E,    KC_R,                          KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_TAB,
                  KC_LSFT, KC_A,    KC_W,    KC_D,    KC_F,                          KC_NO,   KC_LEFT, KC_UP,   KC_RIGHT,KC_LSFT,
-        KC_ESC,  KC_LCTL, KC_Z,    KC_S,    KC_C,    KC_V,                          KC_NO,   KC_NO,   KC_DOWN, KC_NO,   KC_LCTL, TD_BASE,
+        KC_ESC,  KC_LCTL, KC_Z,    KC_S,    KC_X,    KC_C,                          KC_NO,   KC_NO,   KC_DOWN, KC_NO,   KC_LCTL, TD_BASE,
                                             KC_LALT, KC_SPC,  LT_GAME2,   MO_GAME2, KC_SPC,  KC_LALT
     ),
     [U_GAME2] = LAYOUT(
-                 KC_HOME, KC_5,    KC_6,    KC_7,    KC_8,                          KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
-                 KC_ENT,  KC_1,    KC_2,    KC_3,    KC_4,                          KC_H,    KC_J,    KC_K,    KC_L,    KC_QUOT,
-        KC_B,    KC_G,    KC_J,    KC_I,    KC_M,    KC_T,                          KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_NO,
+                 KC_HOME, KC_J,    KC_I,    KC_M,    KC_T,                          KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
+                 KC_ENT,  KC_4,    KC_5,    KC_6,    KC_G,                          KC_H,    KC_J,    KC_K,    KC_L,    KC_QUOT,
+        KC_H,    KC_BSPC, KC_1,    KC_2,    KC_3,    KC_B,                          KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_NO,
                                             KC_NO,   KC_NO,   KC_NO,      MO_GAME2, KC_BSPC, KC_DEL
     )
 };
