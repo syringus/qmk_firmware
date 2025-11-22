@@ -18,5 +18,3 @@
 #define CHORDAL_HOLD
 // TAP_CODE_DELAY for LT taps to work in games
 #define TAP_CODE_DELAY 40
-// OS detection keyboard reset https://docs.qmk.fm/features/os_detection#troubleshooting
-#define OS_DETECTION_KEYBOARD_RESET
