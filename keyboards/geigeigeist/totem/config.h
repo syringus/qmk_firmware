@@ -7,6 +7,7 @@
 #define SERIAL_USART_RX_PIN GP1   // USART RX pin
 #define SERIAL_USART_PIN_SWAP     // Swap TX and RX pins if keyboard is master halve
 #define EE_HANDS // Store handedness in EEPROM
+#define SPLIT_WATCHDOG_ENABLE
 
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET // Activates the double-tap behavior
 #define RP2040_BOOTLOADER_DOUBLE_TAP_RESET_TIMEOUT 500U // Timeout window in ms in which the double tap can occur
