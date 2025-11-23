@@ -14,7 +14,5 @@
 
 // https://docs.qmk.fm/tap_hold#flow-tap
 #define FLOW_TAP_TERM 150
-// https://docs.qmk.fm/tap_hold#chordal-hold
-#define CHORDAL_HOLD
 // TAP_CODE_DELAY for LT taps to work in games
-#define TAP_CODE_DELAY 40
+#define TAP_CODE_DELAY 50
