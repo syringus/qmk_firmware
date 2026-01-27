@@ -44,6 +44,7 @@ enum layers {
 #define U_CPY LCTL(KC_C) // Copy
 #define U_CUT LCTL(KC_X) // Cut
 #define U_UND LCTL(KC_Z) // Undo
+#define U_CTD LCTL(KC_D) // Ctrl+D
 // Layer switching
 #define LT_ESC LT(U_MEDIA, KC_ESC)
 #define LT_SPC LT(U_NAV, KC_SPC)
@@ -149,7 +150,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     ),
     [U_BUTTON] = LAYOUT(
                  U_UND,   DM_REC1, DM_RSTP, DM_PLY1, U_RDO,                         U_RDO,   DM_PLY2, DM_RSTP, DM_REC2, U_UND,
-                 KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, KC_NO,                         KC_NO,   KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,
+                 KC_LGUI, KC_LALT, U_CTD,   KC_LSFT, KC_NO,                         KC_NO,   KC_LSFT, KC_LCTL, KC_LALT, KC_LGUI,
         KC_NO,   U_UND,   U_CUT,   U_CPY,   U_PST,   U_RDO,                         U_RDO,   U_PST,   U_CPY,   U_CUT,   U_UND,   KC_NO,
                                             MS_BTN3, MS_BTN1, MS_BTN2,    MS_BTN2,  MS_BTN1, MS_BTN3
     ),
