@@ -133,13 +133,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [U_NAV] = LAYOUT(
                  KC_NO,   KC_NO,   KC_NO,   TD_BASE, KC_NO,                         U_RDO,   U_PST,   U_CPY,   U_CUT,   U_UND,
                  KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, KC_NO,                         KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT,CW_TOGG,
-        KC_NO,   CK_ALT_F4, KC_NO, TD_NUM,  TD_NAV,  KC_NO,                         KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_INS,  KC_NO,
+        KC_NO,   KC_NO,   KC_NO,   TD_NUM,  TD_NAV,  KC_NO,                         KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_INS,  KC_NO,
                                             KC_NO,   KC_NO,   KC_NO,      KC_ENT,   KC_BSPC, KC_DEL
     ),
     [U_MOUSE] = LAYOUT(
                  KC_NO,   KC_NO,   KC_NO,   TD_BASE, KC_NO,                         U_RDO,   U_PST,   U_CPY,   U_CUT,   U_UND,
                  KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, KC_NO,                         MS_LEFT, MS_DOWN, MS_UP,   MS_RGHT, KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   TD_SYM,  TD_MOUSE,KC_NO,                         MS_WHLL, MS_WHLD, MS_WHLU, MS_WHLR, KC_NO,   KC_NO,
+        KC_NO,   CK_ALT_F4, KC_NO, TD_SYM,  TD_MOUSE,KC_NO,                         MS_WHLL, MS_WHLD, MS_WHLU, MS_WHLR, KC_NO,   KC_NO,
                                             KC_NO,   KC_NO,   KC_NO,      MS_BTN2,  MS_BTN1, MS_BTN3
     ),
     [U_MEDIA] = LAYOUT(
