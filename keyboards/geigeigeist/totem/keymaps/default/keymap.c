@@ -6,6 +6,14 @@
 
 #include QMK_KEYBOARD_H
 
+// LED pins on XIAO RP2040
+#define LED_USER_BLUE       GP25
+#define LED_USER_GREEN      GP16
+#define LED_USER_RED        GP17
+#define LED_NEOPIX_PWR      GP11  // Neopixel LED power (https://wiki.seeedstudio.com/XIAO-RP2040/)
+
+static bool is_suspended;
+
 // Layers definition
 #if !defined(LAYERS)
     #define LAYERS \
@@ -143,9 +151,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             KC_NO,   KC_NO,   KC_NO,      MS_BTN2,  MS_BTN1, MS_BTN3
     ),
     [U_MEDIA] = LAYOUT(
-                 KC_NO,   KC_NO,   KC_NO,   TD_BASE, KC_NO,                         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+                 UG_TOGG, UG_NEXT, UG_HUEU, TD_BASE, UG_SPDU,                       KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
                  KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, KC_NO,                         KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, KC_NO,
-        KC_NO,   KC_NO,   KC_NO,   TD_FUN,  TD_MEDIA,KC_NO,                         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   UG_SATU, UG_VALU, TD_FUN,  TD_MEDIA,KC_NO,                         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
                                             KC_NO,   KC_NO,   KC_NO,      KC_MSTP,  KC_MPLY, KC_MUTE
     ),
     [U_BUTTON] = LAYOUT(
@@ -191,3 +199,59 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             KC_NO,   KC_NO,   MO_GAME2,   MO_GAME2, KC_BSPC, KC_DEL
     )
 };
+
+void board_init(void) {
+    gpio_set_pin_output(LED_NEOPIX_PWR);
+    gpio_write_pin_high(LED_NEOPIX_PWR);
+}
+
+void suspend_power_down_user(void) {
+    if (!is_suspended) {
+        is_suspended = true;
+        rgblight_mode_noeeprom(RGBLIGHT_MODE_BREATHING + 1); // sets mode to medium breathing without saving
+    }
+}
+
+void suspend_wakeup_init_user(void) {
+    is_suspended = false;
+    rgblight_reload_from_eeprom();
+}
+
+const rgblight_segment_t PROGMEM rgb_left_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 1, HSV_TEAL}
+);
+
+const rgblight_segment_t PROGMEM rgb_right_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 1, HSV_GOLD}
+);
+
+const rgblight_segment_t PROGMEM rgb_game_layer[] = RGBLIGHT_LAYER_SEGMENTS(
+    {0, 1, HSV_PURPLE}
+);
+
+const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
+    rgb_left_layer,
+    rgb_right_layer,
+    rgb_game_layer
+);
+
+void keyboard_post_init_user(void) {
+    rgblight_layers = my_rgb_layers;
+}
+
+layer_state_t default_layer_state_set_user(layer_state_t state) {
+    if (layer_state_cmp(state, U_SYM) || (layer_state_cmp(state, U_NUM))
+        || (layer_state_cmp(state, U_FUN))) {
+        rgblight_set_layer_state(0, true);
+    } else {
+        rgblight_set_layer_state(0, false);
+    }
+    if (layer_state_cmp(state, U_MOUSE) || (layer_state_cmp(state, U_NAV))
+        || (layer_state_cmp(state, U_MEDIA))) {
+        rgblight_set_layer_state(1, true);
+    } else {
+        rgblight_set_layer_state(1, false);
+    }
+    rgblight_set_layer_state(2, layer_state_cmp(state, U_GAME));
+    return state;
+}

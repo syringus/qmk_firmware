@@ -14,3 +14,19 @@
 
 // TAP_CODE_DELAY for LT taps to work in games
 #define TAP_CODE_DELAY 50
+
+// RGB Light - underglow
+// https://docs.qmk.fm/features/rgblight
+#define WS2812_DI_PIN GP12 // Neopixel LED DIN (https://wiki.seeedstudio.com/XIAO-RP2040/)
+#define RGBLIGHT_LED_COUNT 1
+#define RGBLIGHT_DEFAULT_ON false
+#define RGBLIGHT_DEFAULT_VAL 0
+#define RGBLIGHT_DEFAULT_SAT 0
+#define RGBLIGHT_DEFAULT_HUE 169
+#define RGBLIGHT_EFFECT_BREATHING
+#define RGBLIGHT_EFFECT_RAINBOW_SWIRL // meni farbu pekne pomaly
+// #define RGBLIGHT_EFFECT_TWINKLE // pulzovanie s roznymi farbami a periodami
+#define RGBLIGHT_SPLIT
+#define RGBLIGHT_LAYERS
+#define RGBLIGHT_LAYERS_RETAIN_VAL // retain brightness when changing layers
+#define SPLIT_LAYER_STATE_ENABLE
