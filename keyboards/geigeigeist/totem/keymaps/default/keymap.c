@@ -11,6 +11,9 @@
 #define LED_USER_GREEN      GP16
 #define LED_USER_RED        GP17
 #define LED_NEOPIX_PWR      GP11  // Neopixel LED power (https://wiki.seeedstudio.com/XIAO-RP2040/)
+#define MY_HSV_ALICEBLUE    147, 15, 255
+#define MY_HSV_LAVENDERBLUSH1 241, 15, 255
+#define MY_HSV_LIGHTPINK    249, 73, 255
 
 static bool is_suspended;
 
@@ -201,6 +204,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 
 void board_init(void) {
+    gpio_set_pin_input(LED_USER_RED);
+    gpio_set_pin_input(LED_USER_GREEN);
+    gpio_set_pin_input(LED_USER_BLUE);
+
     gpio_set_pin_output(LED_NEOPIX_PWR);
     gpio_write_pin_high(LED_NEOPIX_PWR);
 }
@@ -208,7 +215,8 @@ void board_init(void) {
 void suspend_power_down_user(void) {
     if (!is_suspended) {
         is_suspended = true;
-        rgblight_mode_noeeprom(RGBLIGHT_MODE_BREATHING + 1); // sets mode to medium breathing without saving
+        rgblight_mode_noeeprom(RGBLIGHT_MODE_BREATHING + 1);
+        rgblight_sethsv_noeeprom(MY_HSV_LIGHTPINK);
     }
 }
 
