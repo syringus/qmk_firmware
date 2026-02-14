@@ -4,32 +4,34 @@
 // Miryoku QWERTY layout with shifted navigation keys as in vim.
 //   https://github.com/manna-harbour/miryoku
 
+#include "color.h"
+#include "rgb_matrix.h"
 #include QMK_KEYBOARD_H
 
 // LED pins on XIAO RP2040
-#define LED_USER_BLUE       GP25
-#define LED_USER_GREEN      GP16
-#define LED_USER_RED        GP17
-#define LED_NEOPIX_PWR      GP11  // Neopixel LED power (https://wiki.seeedstudio.com/XIAO-RP2040/)
-#define MY_HSV_ALICEBLUE    147, 15, 255
+#define LED_USER_BLUE GP25
+#define LED_USER_GREEN GP16
+#define LED_USER_RED GP17
+#define LED_NEOPIX_PWR GP11 // Neopixel LED power (https://wiki.seeedstudio.com/XIAO-RP2040/)
+#define MY_HSV_ALICEBLUE 147, 15, 255
 #define MY_HSV_LAVENDERBLUSH1 241, 15, 255
-#define MY_HSV_LIGHTPINK    249, 73, 255
+#define MY_HSV_LIGHTPINK 250, 100, 255
 
 static bool is_suspended;
 
 // Layers definition
 #if !defined(LAYERS)
-    #define LAYERS \
-        LAYER_X(BASE) \
-        LAYER_X(NAV) \
-        LAYER_X(MOUSE) \
+#    define LAYERS      \
+        LAYER_X(BASE)   \
+        LAYER_X(NAV)    \
+        LAYER_X(MOUSE)  \
         LAYER_X(BUTTON) \
-        LAYER_X(MEDIA) \
-        LAYER_X(NUM) \
-        LAYER_X(SYM) \
-        LAYER_X(FUN) \
-        LAYER_X(TILE) \
-        LAYER_X(GAME) \
+        LAYER_X(MEDIA)  \
+        LAYER_X(NUM)    \
+        LAYER_X(SYM)    \
+        LAYER_X(FUN)    \
+        LAYER_X(TILE)   \
+        LAYER_X(GAME)   \
         LAYER_X(GAME2)
 #endif
 enum layers {
@@ -79,9 +81,9 @@ enum layers {
 
 // COMBOS
 // Send GUI when LT_SPC+A or LT_BSPC+' is pressed.
-const uint16_t PROGMEM gui_combo_left[] = {LT_SPC, KC_A, COMBO_END};
+const uint16_t PROGMEM gui_combo_left[]  = {LT_SPC, KC_A, COMBO_END};
 const uint16_t PROGMEM gui_combo_right[] = {LT_BSPC, KC_QUOT, COMBO_END};
-combo_t key_combos[] = {
+combo_t                key_combos[]      = {
     COMBO(gui_combo_left, KC_LGUI),
     COMBO(gui_combo_right, KC_LGUI),
 };
@@ -93,17 +95,16 @@ enum {
 #undef LAYER_X
 };
 // The TD_<layer> key needs to be pressed twice to switch layer.
-#define LAYER_X(LAYER) \
+#define LAYER_X(LAYER)                                             \
     void td_u_##LAYER(tap_dance_state_t *state, void *user_data) { \
-        if (state->count == 2) { \
-            default_layer_set((layer_state_t)1 << U_##LAYER); \
-        } \
+        if (state->count == 2) {                                   \
+            default_layer_set((layer_state_t)1 << U_##LAYER);      \
+        }                                                          \
     }
-    LAYERS
+LAYERS
 #undef LAYER_X
 tap_dance_action_t tap_dance_actions[] = {
-#define LAYER_X(LAYER) \
-    [TD_U_##LAYER] = ACTION_TAP_DANCE_FN(td_u_##LAYER),
+#define LAYER_X(LAYER) [TD_U_##LAYER] = ACTION_TAP_DANCE_FN(td_u_##LAYER),
     LAYERS
 #undef LAYER_X
 };
@@ -115,25 +116,26 @@ enum custom_keycodes {
 };
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     switch (keycode) {
-    case CK_TILE:
-        if (record->event.pressed) {
-            layer_on(U_TILE);
-            register_code(KC_F24);
-        } else {
-            unregister_code(KC_F24);
-            layer_off(U_TILE);
-        }
-        break;
-    case CK_ALT_F4:
-        if (record->event.pressed) {
-            SEND_STRING(SS_LALT(SS_TAP(X_F4)));
-        }
-        break;
+        case CK_TILE:
+            if (record->event.pressed) {
+                layer_on(U_TILE);
+                register_code(KC_F24);
+            } else {
+                unregister_code(KC_F24);
+                layer_off(U_TILE);
+            }
+            break;
+        case CK_ALT_F4:
+            if (record->event.pressed) {
+                SEND_STRING(SS_LALT(SS_TAP(X_F4)));
+            }
+            break;
     }
     return true;
 }
 
 // LAYERS
+// clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [U_BASE] = LAYOUT(
                  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                          KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,
@@ -154,9 +156,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             KC_NO,   KC_NO,   KC_NO,      MS_BTN2,  MS_BTN1, MS_BTN3
     ),
     [U_MEDIA] = LAYOUT(
-                 UG_TOGG, UG_NEXT, UG_HUEU, TD_BASE, UG_SPDU,                       KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+                 RM_TOGG, RM_NEXT, RM_HUEU, TD_BASE, RM_SPDU,                       KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
                  KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, KC_NO,                         KC_MPRV, KC_VOLD, KC_VOLU, KC_MNXT, KC_NO,
-        KC_NO,   UG_SATU, UG_VALU, TD_FUN,  TD_MEDIA,KC_NO,                         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
+        KC_NO,   RM_SATU, RM_VALU, TD_FUN,  TD_MEDIA,KC_NO,                         KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,   KC_NO,
                                             KC_NO,   KC_NO,   KC_NO,      KC_MSTP,  KC_MPLY, KC_MUTE
     ),
     [U_BUTTON] = LAYOUT(
@@ -202,6 +204,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             KC_NO,   KC_NO,   MO_GAME2,   MO_GAME2, KC_BSPC, KC_DEL
     )
 };
+// clang-format on
 
 void board_init(void) {
     gpio_set_pin_input(LED_USER_RED);
@@ -212,54 +215,48 @@ void board_init(void) {
     gpio_write_pin_high(LED_NEOPIX_PWR);
 }
 
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    bool    set_color = false;
+    uint8_t led_index = 0;
+    hsv_t   hsv;
+    switch (get_highest_layer(default_layer_state)) {
+        case U_SYM:
+        case U_NUM:
+        case U_FUN:
+            set_color = true;
+            hsv       = (hsv_t){HSV_TEAL};
+            led_index = 0;
+            break;
+        case U_MOUSE:
+        case U_NAV:
+        case U_MEDIA:
+            set_color = true;
+            hsv       = (hsv_t){HSV_GOLD};
+            led_index = 1;
+            break;
+        default:
+            break;
+    }
+    if (set_color) {
+        hsv.v     = rgb_matrix_get_val();
+        rgb_t rgb = hsv_to_rgb(hsv);
+        RGB_MATRIX_INDICATOR_SET_COLOR(led_index, rgb.r, rgb.g, rgb.b);
+    }
+    return false;
+}
+
 void suspend_power_down_user(void) {
+    hsv_t hsv = {MY_HSV_LIGHTPINK};
     if (!is_suspended) {
         is_suspended = true;
-        rgblight_mode_noeeprom(RGBLIGHT_MODE_BREATHING + 1);
-        rgblight_sethsv_noeeprom(MY_HSV_LIGHTPINK);
+        hsv.v        = rgb_matrix_get_val();
+        rgb_matrix_mode_noeeprom(RGB_MATRIX_BREATHING);
+        rgb_matrix_set_speed_noeeprom(50);
+        rgb_matrix_sethsv_noeeprom(hsv.h, hsv.s, hsv.v);
     }
 }
 
 void suspend_wakeup_init_user(void) {
     is_suspended = false;
-    rgblight_reload_from_eeprom();
-}
-
-const rgblight_segment_t PROGMEM rgb_left_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0, 1, HSV_TEAL}
-);
-
-const rgblight_segment_t PROGMEM rgb_right_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0, 1, HSV_GOLD}
-);
-
-const rgblight_segment_t PROGMEM rgb_game_layer[] = RGBLIGHT_LAYER_SEGMENTS(
-    {0, 1, HSV_PURPLE}
-);
-
-const rgblight_segment_t* const PROGMEM my_rgb_layers[] = RGBLIGHT_LAYERS_LIST(
-    rgb_left_layer,
-    rgb_right_layer,
-    rgb_game_layer
-);
-
-void keyboard_post_init_user(void) {
-    rgblight_layers = my_rgb_layers;
-}
-
-layer_state_t default_layer_state_set_user(layer_state_t state) {
-    if (layer_state_cmp(state, U_SYM) || (layer_state_cmp(state, U_NUM))
-        || (layer_state_cmp(state, U_FUN))) {
-        rgblight_set_layer_state(0, true);
-    } else {
-        rgblight_set_layer_state(0, false);
-    }
-    if (layer_state_cmp(state, U_MOUSE) || (layer_state_cmp(state, U_NAV))
-        || (layer_state_cmp(state, U_MEDIA))) {
-        rgblight_set_layer_state(1, true);
-    } else {
-        rgblight_set_layer_state(1, false);
-    }
-    rgblight_set_layer_state(2, layer_state_cmp(state, U_GAME));
-    return state;
+    rgb_matrix_reload_from_eeprom();
 }
