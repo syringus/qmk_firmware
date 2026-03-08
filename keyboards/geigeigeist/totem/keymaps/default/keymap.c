@@ -5,6 +5,7 @@
 //   https://github.com/manna-harbour/miryoku
 
 #include "color.h"
+#include "keycodes.h"
 #include "rgb_matrix.h"
 #include QMK_KEYBOARD_H
 
@@ -15,7 +16,7 @@
 #define LED_NEOPIX_PWR GP11 // Neopixel LED power (https://wiki.seeedstudio.com/XIAO-RP2040/)
 #define MY_HSV_ALICEBLUE 147, 15, 255
 #define MY_HSV_LAVENDERBLUSH1 241, 15, 255
-#define MY_HSV_LIGHTPINK 250, 100, 255
+#define MY_HSV_LIGHTPINK 250, 80, 255
 
 static bool is_suspended;
 
@@ -144,7 +145,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                             LT_ESC,  LT_SPC,  LT_TAB,     LT_ENT,   LT_BSPC, LT_DEL
     ),
     [U_NAV] = LAYOUT(
-                 KC_NO,   KC_NO,   KC_NO,   TD_BASE, KC_NO,                         U_RDO,   U_PST,   U_CPY,   U_CUT,   U_UND,
+                 KC_ENT,  KC_BSPC, KC_DEL,  TD_BASE, KC_NO,                         U_RDO,   U_PST,   U_CPY,   U_CUT,   U_UND,
                  KC_LGUI, KC_LALT, KC_LCTL, KC_LSFT, KC_NO,                         KC_LEFT, KC_DOWN, KC_UP,   KC_RIGHT,CW_TOGG,
         KC_NO,   KC_NO,   KC_NO,   TD_NUM,  TD_NAV,  KC_NO,                         KC_HOME, KC_PGDN, KC_PGUP, KC_END,  KC_INS,  KC_NO,
                                             KC_NO,   KC_NO,   KC_NO,      KC_ENT,   KC_BSPC, KC_DEL
@@ -246,12 +247,12 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 }
 
 void suspend_power_down_user(void) {
-    hsv_t hsv = {MY_HSV_LIGHTPINK};
     if (!is_suspended) {
         is_suspended = true;
-        hsv.v        = rgb_matrix_get_val();
         rgb_matrix_mode_noeeprom(RGB_MATRIX_BREATHING);
-        rgb_matrix_set_speed_noeeprom(50);
+        rgb_matrix_set_speed_noeeprom(45);
+        hsv_t hsv = {MY_HSV_LIGHTPINK};
+        hsv.v     = rgb_matrix_get_val();
         rgb_matrix_sethsv_noeeprom(hsv.h, hsv.s, hsv.v);
     }
 }
