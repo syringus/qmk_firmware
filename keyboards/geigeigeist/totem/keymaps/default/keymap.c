@@ -217,31 +217,35 @@ void board_init(void) {
 }
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-    bool    set_color = false;
-    uint8_t led_index = 0;
-    hsv_t   hsv;
+    rgb_t rgb;
+    hsv_t hsv;
     switch (get_highest_layer(default_layer_state)) {
         case U_SYM:
         case U_NUM:
         case U_FUN:
-            set_color = true;
-            hsv       = (hsv_t){HSV_TEAL};
-            led_index = 0;
+            hsv   = (hsv_t){HSV_TEAL};
+            hsv.v = rgb_matrix_get_val();
+            rgb   = hsv_to_rgb(hsv);
+            RGB_MATRIX_INDICATOR_SET_COLOR(0, rgb.r, rgb.g, rgb.b);
             break;
         case U_MOUSE:
         case U_NAV:
         case U_MEDIA:
-            set_color = true;
-            hsv       = (hsv_t){HSV_GOLD};
-            led_index = 1;
+            hsv   = (hsv_t){HSV_GOLD};
+            hsv.v = rgb_matrix_get_val();
+            rgb   = hsv_to_rgb(hsv);
+            RGB_MATRIX_INDICATOR_SET_COLOR(1, rgb.r, rgb.g, rgb.b);
+            break;
+        case U_GAME:
+        case U_GAME2:
+            hsv   = (hsv_t){HSV_PURPLE};
+            hsv.v = rgb_matrix_get_val();
+            rgb   = hsv_to_rgb(hsv);
+            RGB_MATRIX_INDICATOR_SET_COLOR(0, rgb.r, rgb.g, rgb.b);
+            RGB_MATRIX_INDICATOR_SET_COLOR(1, rgb.r, rgb.g, rgb.b);
             break;
         default:
             break;
-    }
-    if (set_color) {
-        hsv.v     = rgb_matrix_get_val();
-        rgb_t rgb = hsv_to_rgb(hsv);
-        RGB_MATRIX_INDICATOR_SET_COLOR(led_index, rgb.r, rgb.g, rgb.b);
     }
     return false;
 }
